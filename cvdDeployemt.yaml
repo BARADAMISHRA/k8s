@@ -1,6 +1,6 @@
 apiVersion: apps/v1
-kind: DeploymentSet
-metadata: 
+kind: Deployment
+metadata:
     name: cvapp
 spec:
    replicas: 2
@@ -8,16 +8,16 @@ spec:
      matchLabels:
         templateName: cvdapp
         stage: production
-  template:
-    metadata:
-      labels:
-        templateName: cvdapp
-        stage: production
-    spec:
-      containers:
-       - image: lipun1/prasad:latest
-         name: lipun1
-         ports: 
+   template:
+     metadata:
+        labels:
+          templateName: cvdapp
+          stage: production
+     spec:
+       containers:
+        - image: lipun1/prasad:latest
+          name: lipun1
+          ports:
            - containerPort: 8081
              name: http
              protocol: TCP
