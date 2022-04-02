@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+    name: covidopod
+spec:
+ containers:
+   - image: lipun1/prasad:latest
+     name: lipun1
+     ports:
+       - containerPort: 8081
+         name: http
+         protocol: TCP
+     volumeMounts:
+      - name: cv
+        mountPath: "/u01/lk"
+        
+ volumes:
+   - name: cv
+     persistentVolumeClaim: 
+         claimName: covidopvc
