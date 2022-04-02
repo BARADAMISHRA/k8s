@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+   name: config
+data:
+   bankaccount.properties: |
+      acc1= 12345
+      acc2= 4567
+      acc3= 8910
+      acc4= 8393
+   balance.properties: |
+       acc1 = 2l
+       acc2= 3l
+       acc3=  4l
+       acc4= 5l
