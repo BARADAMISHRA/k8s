@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+    name: opaqvolpod
+    labeles:
+      app: web
+spec:
+   containers:
+    - name: lipun1
+      image: lipun1/prasad:latest
+      ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+      volumeMounts:
+        - name: opaqvols
+          mountPath: "/u01/vol"
+   volumes:
+      - name: opaqvols
+        secret:
+           secretName: opaq

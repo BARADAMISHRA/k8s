@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: healthcheckpod
+spec:
+   containers:
+       - image: lipun1/prasad:latest
+         name: lipu1
+         ports:
+            - containerPort: 8081
+              name: http
+              protocol: TCP
+         livenessProbe:
+              httpGet: /actuator/health/liveness
+              port: 8081
+         failureThreshold: 3
+         timeoutSeconds: 5
+         initialDelaySeconds: 20
+
+        readinessProbe:
+              httpGet: /actuator/health/readiness
+              port: 8081
+        failureThreshold: 3
+        timeoutSeconds: 5
+        initialDelaySeconds: 30
+        

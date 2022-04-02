@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+     name: opaqpod
+spec:
+   containers:
+       - image: lipun1/prasad:latest
+         name: lipun1
+         ports:
+           - containerPort: 8081
+             name: http
+             protocol: TCP
+         env:
+           - name: username
+             valueFrom:
+               secretKeyRef:
+                     name: opaq
+                     key: uname
+           - name: password 
+             valueFrom:
+               secretKeyRef:
+                     name: opaq
+                     key: pass

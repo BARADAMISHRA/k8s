@@ -1,0 +1,16 @@
+apiversion: v1
+kind: Pod
+metadata:
+    name:  dockerprivateimg
+    labels:
+      app: docker
+spec:
+  containers: 
+   - name: lipun1
+     image: mlipuns.jfrog.io/mimage-docker-local/lipun:1.0
+     ports:
+       - containerPort: 8081
+         name: http
+         protocol: TCP
+  imagePullPolicy: 
+   - name: mydocker 

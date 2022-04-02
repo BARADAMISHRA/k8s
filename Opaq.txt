@@ -1,0 +1,8 @@
+apiversion: v1
+kind: secret
+metadata:
+    name: opaq
+type: Opaque
+data:
+ uname: bGlwdW4=
+ pass: bGlwdW5AMTIz

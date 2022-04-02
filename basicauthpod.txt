@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+     name: basicauthpod
+spec: 
+   containers:
+     - image: lipun1/prasad:latest
+       name: lipun1
+       ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+       env:
+         - name: username
+           valueFrom:
+              secretKeyRef: 
+                   name: uname
+                   key: basicauth
+         - name: password
+           valueFrom:
+             secretKeyRef:
+                   name: basicauth
+                   key: password
+
+
