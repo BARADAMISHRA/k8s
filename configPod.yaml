@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: barada
+spec:
+  containers:
+     - image: lipun1/prasad:latest
+       name: lipun1
+       ports:
+         - containerPort: 8081
+           name: http
+           protocol: TCP
+      volumeMounts:
+         - name: config
+           mountPath: "/cfg"
+           readOnly: true
+  volumes:
+    - name: config
+      configMap:
+          name: dasvol
+          items:
+           - key: "bankaccount.properties"
+             path: "bankaccount.properties"
