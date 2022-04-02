@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+    name: kumar
+data:
+  driverClassName: com.mysql.jdbc.mysql
+  url:  "http://localhost:3306/dfd"
+  username: barada
+  password: test
