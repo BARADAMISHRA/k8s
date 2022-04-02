@@ -1,0 +1,22 @@
+apiVersion: v1
+kind:  ReplicaSet
+metadata: 
+     name: covidoapp
+spec:
+  replicas: 3
+  matchLabels: 
+     templateName: covidotest
+     stage: sit
+  template:
+    metadata:
+     labels:
+      templateName: covidotest
+      stage: sit
+  spec:
+    containers:
+        - image: lipun1/prasad:latest
+          name: lipun1
+          ports:
+           - containerPort: 8081
+             name: http
+             protocol: TCP
