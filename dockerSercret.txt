@@ -1,3 +1,3 @@
 
-kubectl create secret docker-registry mydocker --docker-Server=https://mlipuns.jfrog.io/ --docker-username=lipunmishra093@gmail.com --docker-password=AKCp8krKqQgJikLebG2xy6BLhHu7PM1yfouPAiKPb2BxPqmnhmvFRyQLK3Q8FNNn3Mazd3kmV --docker-email=lipunmishra093@gmail.com
+kubectl create secret docker-registry mydocker --docker-server=https://mlipuns.jfrog.io/ --docker-username=lipunmishra093@gmail.com --docker-password=AKCp8krKqQgJikLebG2xy6BLhHu7PM1yfouPAiKPb2BxPqmnhmvFRyQLK3Q8FNNn3Mazd3kmV --docker-email=lipunmishra093@gmail.com
 
