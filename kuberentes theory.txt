@@ -1,0 +1,24 @@
+Kubernetes is an orcestrator enginee which is used to create /run /manage and monitors them within a cluster.
+
+few things like
+ > Create and Running a container
+> scaleup/scaledown a container
+> roolback a container
+> monitors
+>provisoning a node 
+
+
+commands:
+=======
+ kubectl get pods --all-namespaces -o wide  (describe all the pods in all namespaces)
+
+kubectl describe pod <podname>  (it describe the details about that pod which pod we pass)
+
+kubectl logs podname  (it shows logs of the pod)
+
+kubectl logs -f podname
+
+
+
+
+
