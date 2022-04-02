@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+    name: lkpod
+spec:
+  containers:
+    - image: lipun1/prasad:latest
+      name: lipu
+      ports: 
+       - containerPort: 8081
+         name: http
+         protocol: TCP
+      env:
+       - name: driverClassName
+         valueFrom:
+           configMapKeyRef: 
+               name: kumar
+               key: driverClassName
+       - name: url
+         valueFrom: 
+          configMapKeyRef: 
+             name: kumar
+             key: url
+       - name: username
+         valueFrom: 
+           configMapKeyRef:
+              name: kumar
+              key: username
+       - name: password
+         valueFrom:
+            configMapKeyRef:
+              name: kumar
+              key: password
