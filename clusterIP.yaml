@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata: 
+   name: ngnix
+spec:
+   selector:
+   matchLabels:
+     templateName: temp-nginx
+   ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
