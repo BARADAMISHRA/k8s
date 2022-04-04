@@ -1,0 +1,14 @@
+
+
+
+
+openssl genrsa -out dashboard.key 2048
+
+
+openssl req -new -key dashboard.key -out dashboard.csr -subj "/C=IN/ST=Odisha/L=Kendrapara/O=lipun/OU=lipun/CN=kubernetes-dashboard"
+
+openssl x509 -req -in dashboard.csr -CA  /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out dashboard.crt -days 500
+
+kubectl create clusterrolebinding dashboard-admin --clusterrole=cluster-admin --serviceaccount=kubernetes-dashboard:kubernetes-dashboard
+
+kubectl create secret generic kubernetes-dashboard-certs --from-file=certs -n kubernetes-dashboard
