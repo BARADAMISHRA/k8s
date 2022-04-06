@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
     name:  resourcequotapod
+    namespace: quota-example
     labels:
       app: test
 spec:
