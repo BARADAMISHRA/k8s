@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+    name:  memorylimtsquota
+    namespace: quota-example
+spec:
+  hard:
+    limts.memory: 1Gi
