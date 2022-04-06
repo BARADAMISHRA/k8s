@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name:  resourcequotapod
+    labels:
+      app: test
+spec:
+  containers:
+   - name: nginxapp
+     image: nginx:latest
+     ports:
+       - containerPort: 8081
+         name: http
+         protocol: TCP
+     resources:
+        requests:
+             cpu: 500m
+    
