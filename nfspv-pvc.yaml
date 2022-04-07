@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+    name: nfs-pv
+spec:
+  storageClassName: nfs-manual
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 500Mi
+  nfs:
+   path: /var/nfs
+   readOnly: false
+   server: 192.168.10.14
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: nfs-pvc
+spec:
+  storageClassName: nfs-manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+   requests: 
+      storage: 500Mi
+
