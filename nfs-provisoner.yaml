@@ -83,13 +83,13 @@ spec:
               mountPath: /persistentvolumes
           env:
             - name: PROVISIONER_NAME
-              value: k8ssudheerdemo.com/nfs
+              value: k8slipu.com/nfs
             - name: NFS_SERVER
-              value: 10.182.0.6
+              value: 192.168.10.14
             - name: NFS_PATH
-              value: /var/tmp/nfs-data
+              value: /var/tmp/backup
       volumes:
         - name: nfs-server
           nfs:
-            server: 10.182.0.6
-            path: /var/nfs/nfs-data
+            server: 192.168.10.14
+            path: /var/nfs/backup
