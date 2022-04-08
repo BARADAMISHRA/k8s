@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+    name: nfs-server-provisoner
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+    name: nfs-server-provisoner-runner
+rules:
+  - apiGroups: [""]
+    resources: ["persistentvolumes"]
+    verbs: ["get","list","watch","create","delete"]
+  - apiGroups: [""]
+    resources: ["persistentvolumeclaims"]
+    verbs: ["get","list","watch","update"]
+  - apiGroups: [""]
+    resources: ["storageclasses"]
+    verbs: ["get","list","watch"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create","update","patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+    name: run-nfs-server-provisoner
+subjects:
+   - kind: ServiceAccount
+     name: nfs-server-provisoner
+     namespace: default
+roleRef:
+   kind: ClusterRole
+   name: nfs-server-provisoner-runner
+   apiGroup: rbac.authorizatiom.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+    name: leader-locking-nfs-server-provisoner
+rules:
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["get","list","watch","create","update","patch"]
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+    name: leader-locking-nfs-server-provisoner
+subjects:
+  - kind: ServiceAccount
+    name: nfs-server-provisoner
+    namespace: default
+roleRef: 
+   kind: Role
+   name: leader-locking-nfs-server-provisoner
+   apiGroup: rbac.authorization.k8s.io
+---
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nfs-server-provisioner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfs-server-provisioner
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nfs-server-provisioner
+    spec:
+      serviceAccountName: nfs-server-provisioner
+      containers:
+        - name: nfs-client-provisioner
+          image: k8s.gcr.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2 #quay.io/external_storage/nfs-client-provisioner:latest
+          volumeMounts:
+            - name: nfs-server
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: k8slipu.com/nfs
+            - name: NFS_SERVER
+              value: 192.168.10.14
+            - name: NFS_PATH
+              value: /var/nfs
+      volumes:
+        - name: nfs-server
+          nfs:
+            server: 192.168.10.14
+            path: /var/nfs/
