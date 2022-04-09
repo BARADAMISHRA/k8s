@@ -1,0 +1,28 @@
+certificate based authentication
+======================
+
+kubectl create namespace barada
+openssl genrsa -out employee.key 2048
+openssl req -new -key employee.key -out employee.csr -subj "/CN=employee/O=sudheer"
+openssl x509 -req -in employee.csr -CA CA_LOCATION/ca.crt -CAkey CA_LOCATION/ca.key -CAcreateserial -out employee.crt -days 500
+kubectl config set-credentials employee --client-certificate=employee.crt --client-key=employee.key
+kubectl config set-context employee-context --cluster=kubernetes --namespace=sudheer --user=employee
+kubectl --context=employee-context get pods
+
+
+service based authentication
+=============================
+
+* rbac is mandatory use 
+here we need to create service account 
+from that we need to get token and cert
+
+set the token as per the below command 
+
+kubectl config set-credentials teja --token= <"token">
+
+nd then edit the config file add service account token 
+
+after that execute below command
+
+kubectl config set-context teja-context --cluster=kubernetes --namespace=devops --user=teja
