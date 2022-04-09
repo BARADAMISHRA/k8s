@@ -26,3 +26,13 @@ nd then edit the config file add service account token
 after that execute below command
 
 kubectl config set-context teja-context --cluster=kubernetes --namespace=devops --user=teja
+
+----------------
+RBAC using username and password:
+
+root@kubernetesmaster:~# kubectl config set-credentials cluster-admin --username=admin --password=dGVzdDEyMwo=
+User "cluster-admin" set.
+root@kubernetesmaster:~# kubectl config set-context sudhams-context --cluster=scratch --namespace=default --user=admin
+Context "usersudhams-context" created.
+root@kubernetesmaster:~#
+
